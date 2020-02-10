@@ -40,17 +40,6 @@ class Paginator(
         class DataWithError(currentPage: Int, data: List<WallpaperData>, val error: Throwable?) : State(currentPage, data)
     }
 
-    sealed class PaginationState(val currentPage: Int, val data: List<WallpaperData>, error: Throwable?) {
-        class DataLoaded(currentPage: Int, data: List<WallpaperData>, error: Throwable? = null) :
-            PaginationState(currentPage, data, error)
-        class FullDataLoaded(currentPage: Int, data: List<WallpaperData>, error: Throwable? = null) :
-            PaginationState(currentPage, data, error)
-        class Loading(currentPage: Int, data: List<WallpaperData>, error: Throwable? = null) :
-            PaginationState(currentPage, data, error)
-        class Error(currentPage: Int, data: List<WallpaperData>, error: Throwable? = null) :
-            PaginationState(currentPage, data, error)
-    }
-
     sealed class PaginationEvent {
         object LoadFirstPage : PaginationEvent()
         object LoadNextPage : PaginationEvent()
@@ -108,6 +97,3 @@ class Paginator(
             }
     }
 }
-
-typealias Loader = (Int) -> Single<Page>
-
